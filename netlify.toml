@@ -1,0 +1,9 @@
+# Netlify config for the Caddie marketing site (static HTML/CSS/JS — no build step)
+[build]
+  publish = "."
+
+# Cache the heavy vendored libs aggressively; they're versioned by content.
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

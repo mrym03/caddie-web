@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>brand</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <style>
+      :root {
+        --ink: #f4f1ea; /* tagline color */
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        background: #010101;
+        overflow: hidden;
+        font-family: Georgia, "Times New Roman", Times, serif;
+        color: var(--ink);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* The WebGL gradient — full screen, behind everything */
+      #gradient-canvas {
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+        height: 100dvh;
+        display: block;
+        z-index: 0;
+      }
+
+      /* The opening tagline — centered over the gradient */
+      .hero {
+        position: fixed;
+        inset: 0;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6vw;
+        pointer-events: none;
+      }
+
+      .brand {
+        font-weight: 400;
+        font-size: clamp(2rem, 5.4vw, 5.5rem);
+        line-height: 1.1;
+        letter-spacing: 0.01em;
+        text-align: center;
+        /* hidden until the gradient blooms in, then revealed by gradient.js */
+        opacity: 0;
+        transform: translate3d(0, 14px, 0);
+        transition: opacity 1.6s ease, transform 1.6s ease;
+        will-change: opacity, transform;
+      }
+      .brand em {
+        font-style: italic;
+      }
+      .brand.is-revealed {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .brand { transition-duration: 0.3s; }
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="gradient-canvas"></canvas>
+
+    <main class="hero">
+      <!-- EDIT: replace this with your brand name. Wrap any part in <em></em> for italic. -->
+      <h1 class="brand">hello <em>world</em></h1>
+    </main>
+
+    <script src="/js/three.min.js"></script>
+    <script src="/js/gradient.js"></script>
+  </body>
+</html>
