@@ -2,8 +2,10 @@
 [build]
   publish = "."
 
-# Cache the heavy vendored libs aggressively; they're versioned by content.
+# three.min.js is a pinned vendor lib that never changes — cache it hard.
+# (gradient.js is left on Netlify's default ETag revalidation since it's still
+# being edited; immutable caching there would serve stale code.)
 [[headers]]
-  for = "/js/*"
+  for = "/js/three.min.js"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
