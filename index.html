@@ -271,7 +271,7 @@
       .icard h3 { font-family: var(--font-display); font-weight: 400; font-size: 1.35rem; margin-bottom: 0.7rem; }
 
       /* ============================ PRICING ============================ */
-      .price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2vw, 1.5rem); margin-top: clamp(3rem, 6vw, 4.5rem); align-items: stretch; }
+      .price-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(1rem, 2vw, 1.5rem); margin: clamp(3rem, 6vw, 4.5rem) auto 0; max-width: 820px; align-items: stretch; }
       .price-card { position: relative; border: 1px solid var(--hairline); border-radius: var(--radius); padding: clamp(1.8rem, 2.6vw, 2.4rem); display: flex; flex-direction: column; background: rgba(238,237,233,0.015); }
       .price-card.featured { border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.04); }
       .badge { position: absolute; top: -0.75rem; left: 50%; transform: translateX(-50%); background: var(--amber); color: var(--bg); font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.35em 0.9em; border-radius: 100px; }
@@ -546,25 +546,12 @@
               </ul>
               <a href="https://app.heycaddie.live/dashboard" class="btn btn-outline">Start free</a>
             </div>
-            <div class="price-card featured reveal" data-d="1">
-              <span class="badge">★ Most Popular</span>
-              <div class="tier">Pro</div>
-              <div class="price">$XX <small>/ mo</small></div>
-              <div class="cap">1,000 minutes · auto-join</div>
-              <ul>
-                <li>Everything in Free</li>
-                <li>Calendar auto-join (Zoom/Meet/Teams)</li>
-                <li>Proactive mode + live fact-checking</li>
-                <li>Gmail + Drive knowledge sync</li>
-              </ul>
-              <a href="https://app.heycaddie.live/dashboard" class="btn btn-solid">Upgrade to Pro</a>
-            </div>
-            <div class="price-card reveal" data-d="2">
+            <div class="price-card reveal" data-d="1">
               <div class="tier">Team</div>
               <div class="price">Custom</div>
               <div class="cap">Multiple seats · shared brain</div>
               <ul>
-                <li>Everything in Pro</li>
+                <li>Everything in Free</li>
                 <li>Shared knowledge base + admin</li>
                 <li>SSO + priority support</li>
               </ul>
@@ -596,7 +583,6 @@
                 <span class="wordmark">caddie</span>
               </a>
               <p class="tag">Your copilot for every call.</p>
-              <a class="mail" href="mailto:hello@caddie.app">hello@caddie.app</a>
             </div>
             <div>
               <h4>Product</h4>
