@@ -432,6 +432,8 @@
   // ---- Render loop ------------------------------------------------------------
   function tick() {
     requestAnimationFrame(tick);
+    // skip the heavy WebGL work while the gradient is scrolled out of view
+    if (window.GRADIENT_ACTIVE === false) return;
     uniforms.uTime.value += 7e-5 * state.speed;
     mesh.scale.x = Math.abs(fovY * camera.aspect);
     mesh.scale.y = Math.abs(fovY);
@@ -476,37 +478,14 @@
     requestAnimationFrame(step);
   }
 
-  var brand = document.querySelector('.brand');
-
-  var SHOW = 2800; // when the gradient expands and the glass appears
-
-  if (reduceMotion) {
-    // Skip the bloom: settle straight to the full gradient + glass.
-    state.opacityBackground = 0.8;
-    state.bgProgress = 1;
-    state.speed = 30;
-    lens.sphereAlpha = 1;
-    lens.refractionPower = 0.75;
-    lensSphere.scale.set(3.5, 3.5, 3.5);
-    lensSphere.position.x = -1;
-    lensVisible = true;
-    if (brand) brand.classList.add('is-revealed');
-  } else {
-    // preShow: the orb blooms in (0 → 2s)
-    tween(state, 'opacityBackground', 0, 0.8, 2000, 0);
-    tween(state, 'bgProgress', 0, 0.25, 2000, 0);
-    // reveal the tagline partway through the bloom
-    setTimeout(function () { if (brand) brand.classList.add('is-revealed'); }, 700);
-    // show: the gradient expands to fill the screen and slows down (after a brief hold)
-    tween(state, 'bgProgress', 0.25, 1, 2000, SHOW);
-    tween(state, 'speed', 100, 30, 2000, SHOW);
-    // the glass sphere fades in, grows and slides — exactly as the original "show"
-    setTimeout(function () { lensVisible = true; }, SHOW);
-    tween(lens, 'sphereAlpha', 0, 1, 1000, SHOW, easeOut);
-    tween(lens, 'refractionPower', 0, 0.75, 1000, SHOW, easeOut);
-    tween(lensSphere.scale, 'x', 3, 3.5, 2000, SHOW, easeOut);
-    tween(lensSphere.scale, 'y', 3, 3.5, 2000, SHOW, easeOut);
-    tween(lensSphere.scale, 'z', 3, 3.5, 2000, SHOW, easeOut);
-    tween(lensSphere.position, 'x', -1.25, -1, 2000, SHOW, easeOut);
-  }
+  // No entrance motion — render the settled scene immediately (gradient + glass orb).
+  // The gradient still drifts gently and reacts to the cursor; there is no intro.
+  state.opacityBackground = 0.8;
+  state.bgProgress = 1;
+  state.speed = 30;
+  lens.sphereAlpha = 1;
+  lens.refractionPower = 0.75;
+  lensSphere.scale.set(3.5, 3.5, 3.5);
+  lensSphere.position.x = -1;
+  lensVisible = true;
 })();
